@@ -1,0 +1,22 @@
+Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        stack<TreeNode*> st;
+        TreeNode* prev=nullptr;
+        while(!st.empty() || root != nullptr){
+            while(root != nullptr){
+                st.push(root);
+                root=root->left;
+            }
+            root=st.top();
+            st.pop();
+            if(prev != nullptr and root->val <= prev->val)
+                return false;
+            prev = root;
+            root=root->right;
+        }
+        return true;
+    }
+};
